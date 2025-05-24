@@ -1,0 +1,32 @@
+.Title {
+  display: flex;
+  justify-content: space-between;
+}
+.Title button {
+  align-self: center;
+}
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.Form input[type="submit"] {
+  width: 100%;
+}
+.Form field{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 4px;
+}
+.Form field label {
+    font-size: 14px;
+}
+.Form field input,
+.Form field textarea,
+.Form field select {
+    width: 100%;
+}
+.Form field textarea {
+    resize: none;
+}
