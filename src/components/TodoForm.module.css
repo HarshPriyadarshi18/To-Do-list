@@ -13,6 +13,11 @@
 .Form input[type="submit"] {
   width: 100%;
 }
+.Form fields{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .Form field{
     display: flex;
     flex-direction: column;

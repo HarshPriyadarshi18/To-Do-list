@@ -24,3 +24,11 @@ body {
   margin: 0 auto;
   padding: 0 24px;
 }
+input,
+textarea,
+select,button {
+  padding: 4px 8px;
+  border: 1px solid light-dark(#dcdcdc, #333);
+  border-radius: 4px;
+  background: light-dark(#fff, #222);
+}
