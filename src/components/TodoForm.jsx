@@ -1,5 +1,7 @@
 import styles from "./TodoForm.module.css";
+import { useState } from "react";
 export function TodoForm({onCreate}) { 
+  const [showAllFields, setShowAllFields] = useState(false);  
   function handleSubmit(event) {
     event.preventDefault();
     const {elements} = event.target
@@ -9,16 +11,18 @@ export function TodoForm({onCreate}) {
     }
     onCreate({   
       name: elements.name.value,
-      description: elements.description.value,
-      deadline: elements.deadline.value,
-      priority: elements.priority.value,
+      description: elements.description?.value??"",
+      deadline: elements.deadline?.value??"",
+      priority: elements.priority?.value??"none",
       completed: false,
     });
     event.target.reset();
   }
   return(
     <section>
-      <h3 className={styles.Title} >New-To-Do</h3>
+      <h3 className={styles.Title} >New-To-Do
+        <button onClick={()=>setShowAllFields(!showAllFields)}>{showAllFields?'Hide':'show'} all fields</button>
+      </h3>
         <form className={styles.Form} onSubmit={handleSubmit}>
             <div className={styles.FormFields}>
              <div className={styles.FormField}>
@@ -31,7 +35,7 @@ export function TodoForm({onCreate}) {
 />
 
                </div>
-              <div className={styles.FormField}>
+             {showAllFields && (<><div className={styles.FormField}>
             <textarea
                 aria-label="Description"
                 placeholder="Description"
@@ -58,6 +62,7 @@ export function TodoForm({onCreate}) {
                 <option value="high">High</option>
             </select>      
             </div>
+             </>)}
             </div>
            <input type="submit" value="Add"  />
         </form>
