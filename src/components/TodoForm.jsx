@@ -1,5 +1,6 @@
 import styles from "./TodoForm.module.css";
 import { useState } from "react";
+import { PRIORITIES, Priority_Default } from "../Constants/priority";
 export function TodoForm({onCreate}) { 
   const [showAllFields, setShowAllFields] = useState(false);  
   function handleSubmit(event) {
@@ -13,7 +14,7 @@ export function TodoForm({onCreate}) {
       name: elements.name.value,
       description: elements.description?.value??"",
       deadline: elements.deadline?.value??"",
-      priority: elements.priority?.value??"none",
+      priority: elements.priority?.value?? Priority_Default,
       completed: false,
     });
     event.target.reset();
@@ -54,13 +55,17 @@ export function TodoForm({onCreate}) {
                 aria-label="Deadline"
                 />
             </div>
-          <label htmlFor="priority">Priority</label>    
-            <select defaultValue="none" name="priority" id="priority">
-                <option value="none" disabled>-- Select Priority --</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>      
+          <div className={styles.FormField}>
+  <label htmlFor="priority">Priority</label>    
+  <select defaultValue={Priority_Default} name="priority" id="priority">
+    {Object.entries(PRIORITIES).map(([key, value]) => (
+      <option key={key} value={key} style={{ color: value.color }}>
+        {value.label}
+      </option>
+    ))}
+ 
+  </select>
+</div>
             </div>
              </>)}
             </div>

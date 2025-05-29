@@ -41,3 +41,9 @@
   font-size: 13px;
     color: gray;
 }
+.Completed h3,
+.Completed .description,
+.Completed .AdditionalInfo {
+  text-decoration: line-through;
+  opacity: 0.6;
+}

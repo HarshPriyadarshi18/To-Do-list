@@ -34,7 +34,13 @@ function App() {
   function handleCreate(newTodo) {
     setTodos((prevTodos) => [...prevTodos, {id: `${prevTodos.length+1}`,...newTodo}]);
   }
-  
+   function handleToggleComplete(id) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  }
   return (
     <div className={styles.App}>
       <header className={styles.Header}>
@@ -44,7 +50,7 @@ function App() {
     
       <div className={styles.AppContainer}><TodoForm onCreate={handleCreate}/> 
       <TodoList
-        todos={todos}
+        todos={todos} onToggleComplete={handleToggleComplete}
       /> 
       
       </div>
