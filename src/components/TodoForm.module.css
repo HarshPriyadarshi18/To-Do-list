@@ -14,44 +14,4 @@
 .Form input[type="submit"] {
   width: 100%;
 }
-
-/* Corrected Class Name */
-.FormFields {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* Corrected Class Name */
-.FormField {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 4px;
-}
-
-.FormField label {
-  font-size: 14px;
-}
-
-.FormField input,
-.FormField textarea,
-.FormField select {
-  width: 100%;
-}
-
-.FormField textarea {
-  resize: none;
-}
-
-/* NEW: Side-by-side layout for Deadline and Priority */
-.FormGroup {
-  display: flex;
-  gap: 12px;
-  align-items: flex-end;
-  margin-bottom: 12px;
-}
-
-.FormGroup .FormField {
-  flex: 1;
-}
+    

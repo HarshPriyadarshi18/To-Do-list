@@ -50,7 +50,14 @@ function App() {
     
       <div className={styles.AppContainer}><TodoForm onCreate={handleCreate}/> 
       <TodoList
-        todos={todos} onToggleComplete={handleToggleComplete}
+        todos={todos} onToggleComplete={handleToggleComplete} 
+        onUpdate={(id, updatedTodo) => {
+          setTodos((prevTodos) =>
+            prevTodos.map((todo) =>
+              todo.id === id ? { ...todo, ...updatedTodo } : todo
+            )
+          );
+        }}
       /> 
       
       </div>

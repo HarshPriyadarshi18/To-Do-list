@@ -1,0 +1,55 @@
+.Completed h3,
+.Completed .description,
+.Completed .AdditionalInfo {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.TodoListItem[data-completed="true"]
+ .Info {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.Content {
+  display: flex;
+  gap: 4px;
+}
+
+.Status {
+  align-self: flex-start;
+  margin-top: 6px;
+
+}
+
+ .Info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.Description {
+  font-size: 13px;
+  color: gray;
+}
+
+.AdditionalInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 4px;
+  font-size: 13px;
+    color: gray;
+}
+.Actions {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  align-self: flex-start;
+  background-color: rgb(170, 40, 20);
+}
+.Actions button,
+.Actions input {
+  padding: 4px 8px;
+  font-size: 14px;
+    background-color: #b4bd8c;
+}
