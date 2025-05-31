@@ -1,7 +1,9 @@
-import { TodoForm } from './components/TodoForm'
-import styles from './App.module.css'
-import { useState } from 'react'
-import { TodoList } from './components/TodoList';
+import { TodoForm } from "./components/TodoForm";
+import styles from "./App.module.css";
+import { useState } from "react";
+import { TodoList } from "./components/TodoList";
+import { TodoFilters } from "./components/TodoFilters";
+import { COMPLETED_FILTERS, PRIORITY_FILTERS } from "./Constants/Filters";
 
 const TODOS_DEFAULT = [
   {
@@ -29,51 +31,74 @@ const TODOS_DEFAULT = [
     completed: true,
   },
 ];
+
 function App() {
-  const [todos, setTodos] = useState(TODOS_DEFAULT);  
+  const [todos, setTodos] = useState(TODOS_DEFAULT);
+  const [filter, setFilter] = useState({});
+
   function handleCreate(newTodo) {
-    setTodos((prevTodos) => [...prevTodos, {id: `${prevTodos.length+1}`,...newTodo}]);
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      { id: `${prevTodos.length + 1}`, ...newTodo },
+    ]);
   }
+
+function filterTodos(todo) {
+  const { completeFilter, priorityFilter } = filter;
+
+  const completeMatch =
+    !completeFilter || completeFilter === "all"
+      ? true
+      : completeFilter === "completed"
+      ? todo.completed === true
+      : todo.completed === false;
+
+  const priorityMatch =
+    !priorityFilter || priorityFilter === "all"
+      ? true
+      : todo.priority === PRIORITY_FILTERS[priorityFilter].value;
+
+  return completeMatch && priorityMatch;
+}
+
+
   function handleDelete(id) {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
-   function handleToggleComplete(id) {
+
+  function handleToggleComplete(id) {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   }
+
   return (
     <div className={styles.App}>
       <header className={styles.Header}>
-        <img className={styles.Logo} src='/to-do-list.png'/>
+        <img className={styles.Logo} src="/to-do-list.png" alt="Logo" />
         <h2 className={styles.Title}>Todo App</h2>
       </header>
-    
-      <div className={styles.AppContainer}><TodoForm onCreate={handleCreate}/> 
-      <TodoList
-        todos={todos} onToggleComplete={handleToggleComplete} 
-        onUpdate={(id, updatedTodo) => {
-          setTodos((prevTodos) =>
-            prevTodos.map((todo) =>
-              todo.id === id ? { ...todo, ...updatedTodo } : todo
-            )
-          );
-        }}
-        onDelete={handleDelete}
-      /> 
-      
+
+      <div className={styles.AppContainer}>
+        <TodoForm onCreate={handleCreate} />
+        <TodoFilters onFilter={setFilter} />
+        <TodoList
+          todos={todos.filter(filterTodos)}
+          onToggleComplete={handleToggleComplete}
+          onUpdate={(id, updatedTodo) => {
+            setTodos((prevTodos) =>
+              prevTodos.map((todo) =>
+                todo.id === id ? { ...todo, ...updatedTodo } : todo
+              )
+            );
+          }}
+          onDelete={handleDelete}
+        />
       </div>
     </div>
-  )             
+  );
 }
 
-export default App
-
-
-
-
-
-
-
+export default App;

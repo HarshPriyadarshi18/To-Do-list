@@ -29,6 +29,7 @@ export function TodoForm({onCreate}) {
          <TodoFormField
           showAllFields={showAllFields} 
           />
+          
            <input type="submit" value="Add"  />
         </form>
     </section>
