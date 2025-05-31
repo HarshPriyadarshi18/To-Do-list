@@ -4,8 +4,11 @@ import {TodoFormField} from './TodoFormField';
 import styles from "./TodoListItem.module.css";
 import { useState } from 'react';
 
-export function TodoListItem({todo, onToggleComplete,onUpdate}) {
+export function TodoListItem({todo, onToggleComplete,onUpdate,onDelete}) {
     const[isEditing, setIsEditing] = useState(false);
+
+    
+
     function handleEdit(event) {
          event.preventDefault();
     const {elements} = event.target;
@@ -46,6 +49,7 @@ export function TodoListItem({todo, onToggleComplete,onUpdate}) {
               </div>
               <div className={styles.Actions}>
                 <button onClick={() => setIsEditing(true)}>📝</button>
+                <button onClick={()=>onDelete(todo.id)}>🗑️</button>
               </div>
             </div>);
      const EditingTemplate=

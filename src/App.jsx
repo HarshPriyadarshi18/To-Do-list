@@ -34,6 +34,9 @@ function App() {
   function handleCreate(newTodo) {
     setTodos((prevTodos) => [...prevTodos, {id: `${prevTodos.length+1}`,...newTodo}]);
   }
+  function handleDelete(id) {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  }
    function handleToggleComplete(id) {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
@@ -58,6 +61,7 @@ function App() {
             )
           );
         }}
+        onDelete={handleDelete}
       /> 
       
       </div>
