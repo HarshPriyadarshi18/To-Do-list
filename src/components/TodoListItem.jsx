@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form';
 import {TodoFormField} from './TodoFormField';
 import styles from "./TodoListItem.module.css";
 import { useState } from 'react';
-
+import { getTodoSchema } from "../Schemas/Todo";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 
 export function TodoListItem({todo, onToggleComplete,onUpdate,onDelete}) {
     const[isEditing, setIsEditing] = useState(false);
-    const {register,handleSubmit,formState:{errors}}=useForm({defaultValues:todo});
+    const {register,handleSubmit,formState:{errors}}=useForm({ resolver:yupResolver(getTodoSchema()),defaultValues:todo});
     
 
     function handleEdit(data) {

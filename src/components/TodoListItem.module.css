@@ -45,7 +45,7 @@
   flex-wrap: nowrap;
   gap: 4px;
   align-self: flex-start;
-  background-color: rgb(170, 40, 20);
+  background-color: #972222;
 }
 .Actions button,
 .Actions input {

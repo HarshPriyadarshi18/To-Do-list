@@ -27,3 +27,8 @@
 .FormField select {
   width: 100%;
 }
+.Error{
+  padding-left: 9px;
+  font-size: 13px;
+  color:salmon;
+}

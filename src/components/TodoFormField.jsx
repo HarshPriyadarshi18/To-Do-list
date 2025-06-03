@@ -1,6 +1,7 @@
 import { PRIORITIES, Priority_Default } from "../Constants/priority";
 import styles from "./TodoFormField.module.css";
 
+
 export function TodoFormField({ todo = {}, showAllFields = true, register, errors = {} }) {
   const minDate = new Date().toISOString().split("T")[0];
 
@@ -16,7 +17,7 @@ export function TodoFormField({ todo = {}, showAllFields = true, register, error
           placeholder="Name*"
           autoComplete="off"
           defaultValue={todo.name ?? ""}
-          {...register("name", {
+          {...register("name"/*, {
             required: "Name is required",
             minLength: {
               value: 3,
@@ -26,7 +27,7 @@ export function TodoFormField({ todo = {}, showAllFields = true, register, error
               value: 50,
               message: "Name should be of maximum length 50",
             },
-          })}
+          }*/)}
         />
         {errors.name && <p className={styles.Error}>{errors.name.message}</p>}
       </div>
@@ -43,12 +44,12 @@ export function TodoFormField({ todo = {}, showAllFields = true, register, error
               placeholder="Description"
               rows="3"
               defaultValue={todo.description ?? ""}
-              {...register("description", {
+              {...register("description"/*, {
                 maxLength: {
                   value: 200,
                   message: "Description should be of maximum length 200",
                 },
-              })}
+              }*/)}
             />
             {errors.description && <p className={styles.Error}>{errors.description.message}</p>}
           </div>
@@ -63,14 +64,14 @@ export function TodoFormField({ todo = {}, showAllFields = true, register, error
                 name="deadline"
                 defaultValue={todo.deadline ?? ""}
                 min={minDate}
-                {...register("deadline", {
+                {...register("deadline"/*, {
                   ...( !todo.id && {
                     min: {
                       value: minDate,
                       message: "Deadline can't be in the past",
                     },
                   }),
-                })}
+                }*/)}
               />
               {errors.deadline && <p className={styles.Error}>{errors.deadline.message}</p>}
             </div>
