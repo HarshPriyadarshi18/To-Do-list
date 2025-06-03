@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 export function TodoListItem({todo, onToggleComplete,onUpdate,onDelete}) {
     const[isEditing, setIsEditing] = useState(false);
-    const {register,handleSubmit}=useForm();
+    const {register,handleSubmit,formState:{errors}}=useForm({defaultValues:todo});
     
 
     function handleEdit(data) {
@@ -56,7 +56,7 @@ export function TodoListItem({todo, onToggleComplete,onUpdate,onDelete}) {
             </div>);
      const EditingTemplate=
      <form   className={styles.Content} onReset={() => setIsEditing(false)} onSubmit={handleSubmit(handleEdit)}>
-        <TodoFormField todo={todo} register={register}/>
+        <TodoFormField todo={todo} register={register} errors={errors}/>
         <div className='Actions'>
             <input type="submit" value="✅" />
             <input type="reset" value="🔄"/>
