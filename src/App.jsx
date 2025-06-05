@@ -1,11 +1,11 @@
 import { TodoForm } from "./components/TodoForm";
 import styles from "./App.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TodoList } from "./components/TodoList";
 import { TodoFilters } from "./components/TodoFilters";
 import { COMPLETED_FILTERS, PRIORITY_FILTERS } from "./Constants/Filters";
 
-const TODOS_DEFAULT = [
+/*const TODOS_DEFAULT = [
   {
     id: "1",
     name: "Sell Old Macbook Pro 2023",
@@ -31,11 +31,24 @@ const TODOS_DEFAULT = [
     completed: true,
   },
 ];
-
+*/
 function App() {
-  const [todos, setTodos] = useState(TODOS_DEFAULT);
+ // const [todos, setTodos] = useState(TODOS_DEFAULT);
+ const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState({});
-
+  function fetchTodos(){
+     fetch(`${import.meta.env.VITE_MOCKAPI_BASE_URL}/todos`, {
+  method: 'GET',
+  headers: {
+    'content-type': 'application/json'
+  },
+})
+  .then((response) => !!response.ok && response.json() )
+  .then((todos)=>setTodos(todos));
+  }
+  useEffect(()=>{
+     fetchTodos();
+  },[]);
   function handleCreate(newTodo) {
     setTodos((prevTodos) => [
       ...prevTodos,
