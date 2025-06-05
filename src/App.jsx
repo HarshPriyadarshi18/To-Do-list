@@ -49,11 +49,19 @@ function App() {
   useEffect(()=>{
      fetchTodos();
   },[]);
-  function handleCreate(newTodo) {
+  /*function handleCreate(newTodo) {
     setTodos((prevTodos) => [
       ...prevTodos,
       { id: `${prevTodos.length + 1}`, ...newTodo },
     ]);
+  }*/
+ function handleCreate(newTodo) {
+   fetch(`${import.meta.env.VITE_MOCKAPI_BASE_URL}/todos`, {
+  method: 'POST',
+  headers: {'content-type':'application/json'},
+  body: JSON.stringify(newTodo)
+}) .then((response) => !!response.ok && response.json() )
+  .then((todos)=>fetchTodos(todos));
   }
 
 function filterTodos(todo) {
@@ -75,8 +83,14 @@ function filterTodos(todo) {
 }
 
 
-  function handleDelete(id) {
+  /*function handleDelete(id) {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  }*/
+ function handleDelete(id) {
+   fetch(`${import.meta.env.VITE_MOCKAPI_BASE_URL}/todos/${id}`, {
+  method: 'DELETE',
+}).then((response) => !!response.ok && response.json() )
+  .then((todos)=>fetchTodos(todos));
   }
 
   function handleToggleComplete(id) {
